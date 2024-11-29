@@ -48,6 +48,17 @@ res.status(500).json(err);
 }
 }
 
+const getYearSteps = async (req, res) => {
+try{
+const getYearSteps = await StepSchema.find({date: { $regex: req.params.year + '.*' } });
+
+res.status(200).json(getYearSteps);
+}catch(err){
+res.status(500).json(err);
+}
+}
+
 module.exports = {
-getAllSteps, createSteps, getSingleStep, updateStep, deleteStep
+getAllSteps, createSteps, getSingleStep, updateStep, deleteStep,
+getYearSteps
 };
